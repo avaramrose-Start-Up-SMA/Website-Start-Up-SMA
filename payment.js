@@ -146,22 +146,92 @@ function finishOrder() {
   }
 
 
-  alert(
-    'Pesanan berhasil dibuat!\n\n' +
-    'Metode pembayaran: ' +
-    paymentText
+  /* =========================================
+     HITUNG PESANAN
+  ========================================= */
+
+  const subtotal = cart.reduce(
+    (sum, item) => {
+      return sum + (item.price * item.qty);
+    },
+    0
   );
 
+  const grandTotal = subtotal + serviceFee;
 
-  // Kosongkan keranjang
+
+  /* =========================================
+     BUAT PESAN WHATSAPP
+  ========================================= */
+
+  let pesan =
+    'Halo, saya ingin memesan:%0A%0A';
+
+
+  cart.forEach((item) => {
+
+    pesan +=
+      '• ' +
+      item.name +
+      ' x' +
+      item.qty +
+      ' - Rp ' +
+      (item.price * item.qty).toLocaleString('id-ID') +
+      '%0A';
+
+  });
+
+
+  pesan +=
+    '%0ASubtotal: Rp ' +
+    subtotal.toLocaleString('id-ID');
+
+  pesan +=
+    '%0ABiaya layanan: Rp ' +
+    serviceFee.toLocaleString('id-ID');
+
+  pesan +=
+    '%0ATotal: Rp ' +
+    grandTotal.toLocaleString('id-ID');
+
+  pesan +=
+    '%0AMetode pembayaran: ' +
+    paymentText;
+
+
+  /* =========================================
+     NOMOR WHATSAPP
+  ========================================= */
+
+  const nomorWA = '6289669537643';
+
+
+  /* =========================================
+     BUKA WHATSAPP
+  ========================================= */
+
+  const url =
+    'https://wa.me/' +
+    nomorWA +
+    '?text=' +
+    pesan;
+
+  window.open(url, '_blank');
+
+
+  /* =========================================
+     KOSONGKAN KERANJANG
+  ========================================= */
+
   cart = [];
 
-
-  // Update tampilan
   updateCartUI();
 
 
-  // Tutup modal
+  /* =========================================
+     TUTUP MODAL
+  ========================================= */
+
   closePaymentModal();
 
 }
