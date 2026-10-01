@@ -132,7 +132,6 @@ function closePaymentModal() {
 
 }
 
-
 /* =========================================
    SELESAIKAN PESANAN
 ========================================= */
@@ -147,7 +146,7 @@ function finishOrder() {
 
 
   /* =========================================
-     HITUNG PESANAN
+     HITUNG TOTAL
   ========================================= */
 
   const subtotal = cart.reduce(
@@ -164,9 +163,7 @@ function finishOrder() {
      BUAT PESAN WHATSAPP
   ========================================= */
 
-  let pesan =
-    'Halo, saya ingin memesan:%0A%0A';
-
+  let pesan = 'Halo, saya ingin memesan:%0A%0A';
 
   cart.forEach((item) => {
 
@@ -180,7 +177,6 @@ function finishOrder() {
       '%0A';
 
   });
-
 
   pesan +=
     '%0ASubtotal: Rp ' +
@@ -203,20 +199,18 @@ function finishOrder() {
      NOMOR WHATSAPP
   ========================================= */
 
-  const nomorWA = '6289669537643';
+  const nomorWA = '628XXXXXXXXXX';
 
 
   /* =========================================
-     BUKA WHATSAPP
+     DIRECTION KE WHATSAPP
   ========================================= */
 
-  const url =
+  window.location.href =
     'https://wa.me/' +
     nomorWA +
     '?text=' +
     pesan;
-
-  window.open(url, '_blank');
 
 
   /* =========================================
@@ -226,11 +220,6 @@ function finishOrder() {
   cart = [];
 
   updateCartUI();
-
-
-  /* =========================================
-     TUTUP MODAL
-  ========================================= */
 
   closePaymentModal();
 
