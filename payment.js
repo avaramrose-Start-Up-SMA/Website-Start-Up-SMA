@@ -199,7 +199,7 @@ function finishOrder() {
      NOMOR WHATSAPP
   ========================================= */
 
-  const nomorWA = '628XXXXXXXXXX';
+  const nomorWA = '6289669537643';
 
 
   /* =========================================
